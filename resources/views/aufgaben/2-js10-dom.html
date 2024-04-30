@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>2-js10-dom.html</title>
+
+</head>
+<body>
+
+<ul>
+<li>
+    <button class="btn title" >TITLE)</button>
+</li>
+<li>
+    <button class="btn width" >WIDTH)</button>
+</li>
+<li>
+    <button class="btn URL" >URL)</button>
+</li>
+<li>
+    <button class="btn cookie" >Cookie)</button>
+</li>
+
+<!-- document.cookie = "name=Cookie;" -->
+</ul>
+<script>
+    "use strict";
+
+    // 1) den Titel des Dokuments
+    console.log("Dokument Titel:", document.title);
+
+    // 2) die Breite und Höhe des Darstellungsbereichs
+    console.log("Darstellungsbereich Breite:", window.innerWidth);
+    console.log("Darstellungsbereich Höhe:", window.innerHeight);
+
+    // 3) die aktuelle URL des Dokuments
+    console.log("Aktuelle URL:", window.location.href);
+
+    // 4) die gesetzten Cookies
+    // Hinweis: Cookies können nicht direkt über JavaScript ausgelesen werden,
+    // aber Sie können sie setzen und dann auslesen.
+    document.cookie = "username=John Doe";
+    console.log("Gesetzte Cookies:", document.cookie);
+    document.querySelector(".title").addEventListener('click', function () {
+        alert(document.title);
+    });
+    document.querySelector(".width").addEventListener('click', function () {
+        alert("Width= " + innerWidth + " & Height= " + innerHeight);
+    });
+    document.querySelector(".URL").addEventListener('click', function () {
+        alert(document.URL);
+    });
+    document.querySelector(".cookie").addEventListener('click', function () {
+        alert(document.cookie);
+    });
+
+</script>
+</body>
+</html>
