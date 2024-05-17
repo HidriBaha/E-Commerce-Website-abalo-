@@ -5,8 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title')</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+<script src="{{asset("js/cart.js")}}"></script>
 </head>
 <body>
+<h1>Warenkorb</h1>
+<div class = "cart-items" ></div>
+
 <div class="container">
     <h1 class="mt-5 mb-4">List of Articles</h1>
     <table class="table">
@@ -25,18 +29,24 @@
         @foreach ($ab_article as $article)
             <tr id="{{ $article->id }}">
                 <td>{{ $article->id }}</td>
-                <td>{{ $article->ab_name }}</td>
-                <td>{{ $article->ab_price }}</td>
+                <td class = "articlename">{{ $article->ab_name }}</td>
+                <td class = "articleprice">{{ $article->ab_price }}</td>
                 <td>{{ $article->ab_description }}</td>
                 <td>{{ $article->ab_creator_id }}</td>
                 <td>{{ $article->ab_createdate }}</td>
-                <td>
+                <td class = "articlepicture">
                     @if (file_exists(public_path('articelimages/' . $article->id . '.jpg')))
                         <img src="{{ url('./articelimages/'.$article->id).'.jpg' }}" alt="Image" class="img-thumbnail" style="max-width: 120px;">
                     @else
                         No image available
                     @endif
                 </td>
+                <td> <form class = "atc">
+                        <input type="hidden" id="id" name="id">
+                        <button type="button">Add to cart</button>
+                    </form>
+                </td>
+
             </tr>
         @endforeach
         </tbody>

@@ -77,11 +77,11 @@
     createMenu(menu);
 
     // Cookie akzeptieren reset
-    //document.cookie = "check=false; expires=Thu, 01 Jan 2022 00:00:00 UTC; path=/;";
+    document.cookie = "check=false; expires=Thu, 18 DEC 2025 00:00:00 UTC; path=/;";
     console.log(document.cookie);
 
 
-    setCookieDiv();
+
 
 
 
