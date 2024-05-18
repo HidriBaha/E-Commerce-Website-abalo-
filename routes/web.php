@@ -24,4 +24,9 @@ Route::get('/articles',[App\Http\Controllers\AbArticleController::class,'SearchA
 Route::get('/', function () {
     return view('Navigation');
 });
+Route::get('/newarticle', function () {
+    return view('m2_newarticle');
+
+});
+Route::post('/newarticle', [\App\Http\Controllers\abArticleController::class, 'addArticleAJAX']);
 require __DIR__.'/auth.php';

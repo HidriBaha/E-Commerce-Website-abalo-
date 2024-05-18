@@ -1,65 +1,72 @@
+//defining navmenu Obj
+const NavigationMenu = {
+    create: function (name) {
+        return document.createElement(name);
+    },
 
-    function create(name){
-    return document.createElement(name);
-}
-
-    function createMenu(menu){
-        let nav = create('nav');
-        let ul = create('ul');
-        let elements = menu["el"];
-
-        for (let i=0;i<elements.length;i++){
-            let link = create("a");
-            let e = create("li")
-            e.innerText = elements[i].name;
-
-            link.addEventListener("click", function() {
-                console.log("Clicked on " + elements[i].name);
-                elements[i].a();
-            });
-            link.addEventListener("click", function(){
-                elements[i].a();
-            });
-            // add hover color
-            link.addEventListener("mouseover", function(){
-                e.style.cssText = 'color:' +  elements[i].hoverColor();
-            });
-            link.addEventListener("mouseout", function(){
-                e.style.cssText = 'color: inherit';
-            });
-
-            link.appendChild(e);
-            ul.appendChild(link);
-
-
-    // if submenu exists
-    if (elements[i].sub === true){
-    let sub_ul = create('ul');
-    let j = 1;
-
-    for (j=1; j<=elements[i].anzahl;j++)
+    createMenu:function (menu)
 {
-    let sub_e = create("li");
-    let sub_link = create("a");
-    sub_e.innerText = elements[i+j].name;
-    console.log(j);
-    sub_link.addEventListener("mouseover", function(){
-    sub_e.style.cssText = 'color:' +  elements[j].hoverColor();
-});
-    sub_link.addEventListener("mouseout", function(){
-    sub_e.style.cssText = 'color: inherit';
-});
-    sub_link.append(sub_e);
-    sub_ul.append(sub_link);
-}
-    ul.append(sub_ul);
-    i += elements[i].anzahl;
-}
-}
+    let nav = this.create('nav');
+    let ul = this.create('ul');
+    menu.el.forEach(item=> {
+        let link = this.create("a");
+        let e = this.create("li")
+        e.innerText = item.name;
+
+        link.addEventListener("click", function () {
+            console.log("Clicked on " + item.name);
+            item.a();
+        });
+        link.addEventListener("click", function () {
+            item.a();
+        });
+        // add hover color
+        link.addEventListener("mouseover", function () {
+            e.style.cssText = 'color:' + item.hoverColor();
+        });
+        link.addEventListener("mouseout", function () {
+            e.style.cssText = 'color: inherit';
+        });
+
+        link.appendChild(e);
+        ul.appendChild(link);
+
+
+        // if submenu exists
+        if (item.sub) {
+            let sub_ul = NavigationMenu.create('ul');
+
+            // Loop through subsequent items to find submenu items
+            for (let j = 1; j <= item.anzahl; j++) {
+                let subItem = menu.el[menu.el.indexOf(item) + j];
+
+                // Check if the current item is a submenu item
+                if (subItem && subItem.sub) {
+                    break; // Exit the loop if a parent item is encountered
+                }
+
+                let sub_e = this.create("li");
+                let sub_link = this.create("a");
+                sub_e.innerText = subItem.name; // Use the submenu item
+                console.log(j);
+                sub_link.addEventListener("mouseover", function () {
+                    sub_e.style.cssText = 'color:' + subItem.hoverColor();
+                });
+                sub_link.addEventListener("mouseout", function () {
+                    sub_e.style.cssText = 'color: inherit';
+                });
+                sub_link.append(sub_e);
+                sub_ul.append(sub_link);
+            }
+            ul.append(sub_ul);
+        }
+
+    });
     nav.append(ul);
 
     document.body.append(nav);
-}
+}};
+
 
     let menu = {
     el:
@@ -74,7 +81,7 @@
 };
 
 
-    createMenu(menu);
+    NavigationMenu.createMenu(menu);
 
     // Cookie akzeptieren reset
     document.cookie = "check=false; expires=Thu, 18 DEC 2025 00:00:00 UTC; path=/;";

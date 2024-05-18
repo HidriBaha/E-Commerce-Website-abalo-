@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>static js</title>
+</head>
+<body>
+<p id="msg" >
+</body>
+<script>
+   "use strict";
+    console.log("test");
+    let xhr=new XMLHttpRequest();
+    xhr.open("GET","/public/static/message.json");
+    xhr.setRequestHeader("Content-Type","application/json");
+    xhr.onreadystatechange=function(){
+        if(xhr.readyState===4 && xhr.status===200){
+            let data=JSON.parse(xhr.responseText);
+            document.getElementById("msg").innerHTML=data["message"];
+        console.log(data);}
+        else{
+            console.log(xhr.statusText);
+        }
+    };
+   xhr.send();
+
+
+</script>
+
+
+</html>
+
+

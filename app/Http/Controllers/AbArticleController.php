@@ -21,4 +21,14 @@ class AbArticleController extends Controller
         return view('Search', ['ab_article' => $ab_article]);
     }
 
+public function addArticleAJAX(Request $r)
+    {
+        // Attempt to add the article
+        $a = (new abArticle())->addArticle($r->name, $r->price, $r->description);
+
+        if ($a) {
+            return response()->json(['success' => 'SUCCESS']);
+        } else {
+            return response()->json(['error' => 'Failed to insert the article.']);
+        } }
 }
