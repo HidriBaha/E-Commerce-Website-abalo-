@@ -5,7 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home </title>
     <!-- Bootstrap CSS -->
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../public/css/app.css">
+
+    <link rel="stylesheet" href="../../public/css/main.css">
+
     <script src="{{asset("js/cookiecheck.js")}}"></script>
 
 </head>
@@ -38,7 +43,7 @@
             if (xhr.readyState === 4) {
                 if (xhr.status === 200) {
                     let json = JSON.parse(xhr.responseText);
-                    console.log("json is"+json);
+                   console.log("json is"+json);
                     if (json.success === "SUCCESS") {
                         document.getElementById('ausgabe').innerText = "Das Produkt wurde erfolgreich hinzugefügt";
                     } else {

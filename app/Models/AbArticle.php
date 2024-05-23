@@ -20,9 +20,9 @@ class AbArticle extends Model
         'ab_description',
     ];
 
-    public function ab_articleSearch($request)
+    public static function ab_articleSearch($request)
     {
-        return $this->select('*')
+        return DB::table('ab_article')
             ->where('ab_name', 'ilike', '%' . $request . '%')->get();
     }
 
@@ -40,6 +40,7 @@ class AbArticle extends Model
                 'ab_description' => $description,
                 'ab_creator_id' => 1
             ]);
+            return $maxId+1;
 
 
         }

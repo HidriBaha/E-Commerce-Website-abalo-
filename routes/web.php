@@ -30,3 +30,4 @@ Route::get('/newarticle', function () {
 });
 Route::post('/newarticle', [\App\Http\Controllers\abArticleController::class, 'addArticleAJAX']);
 require __DIR__.'/auth.php';
+
