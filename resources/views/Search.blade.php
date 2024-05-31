@@ -5,12 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title')</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-<script src="{{asset("js/cart.js")}}"></script>
+    <script src="{{asset("js/servercart.js")}}"></script>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
 <body>
 <h1>Warenkorb</h1>
 <div class = "cart-items" ></div>
-
+<div id="cart-container"></div>
 <div class="container">
     <h1 class="mt-5 mb-4">List of Articles</h1>
     <table class="table">
@@ -28,7 +29,8 @@
         <tbody>
         @foreach ($ab_article as $article)
             <tr id="{{ $article->id }}">
-                <td>{{ $article->id }}</td>
+                <td class="id">{{ $article->id }}</td>
+
                 <td class = "articlename">{{ $article->ab_name }}</td>
                 <td class = "articleprice">{{ $article->ab_price }}</td>
                 <td>{{ $article->ab_description }}</td>

@@ -4,36 +4,41 @@
     <meta charset="UTF-8">
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta id="csrf-token" content="{{ csrf_token() }}">
     <title>Document</title>
 </head>
 <body>
+bahaaaa
 <script>
-    let xhr=new XMLHttpRequest();
-    let url=new URL(window.location.href);
-    let name=url.searchParams.get("name");
-    let description=url.searchParams.get("description");
-    let price=url.searchParams.get("price");
-    if(price>null&& name!=="")
-    {
-        xhr.open('POST',"/api/articles");
-        xhr.setRequestHeader("Content-Type","application/json");
-        xhr.setRequestHeader("X-CSRF-TOKEN",document.getElementById("csrf").content);4
-        xhr.onreadystatechange=function (){
+    "use strict;"
+    var xhr = new XMLHttpRequest();
+
+    var url = new URL(window.location.href);
+    var name = url.searchParams.get("name");
+    var price = parseInt(url.searchParams.get("price"));
+    var description = url.searchParams.get("description");
+
+    let formdata = new FormData();
+       formdata.append("name", "baha");
+         formdata.append("price", 22);
+            formdata.append("description", "idk");
+
+        xhr.open('POST', "/api/articles");
+        xhr.setRequestHeader("X-CSRF-TOKEN",
+            document.getElementById("csrf-token").getAttribute('content')
+        );
+    xhr.send(formdata);
+        xhr.onreadystatechange = function () {
             if (xhr.readyState === 4) {
                 if (xhr.status === 200) {
-                    var response = JSON.parse(xhr.responseText);
-                    console.log(response);
-                    // Handle the response data here
+                    console.log(xhr.responseText);
                 } else {
-                    console.error("Error: " + xhr.status);
+                    console.error(xhr.statusText);
                 }
             }
-        };
-        xhr.send('name='+name+'&description='+description+'&price='+price);
+        }
 
-    }
+
 </script>
-
 </body>
 </html>

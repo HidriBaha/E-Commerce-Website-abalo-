@@ -1,5 +1,4 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-    "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE HTML >
 <html>
 <head>
     <meta charset="UTF-8">
@@ -16,12 +15,13 @@
 <body>
 
 <!-- The menu will be generated here -->
-<script src="{{asset("js/Navigation.js")}}" >
+<script src="{{ asset('js/cookiecheck.js') }}"></script>
+<script src="{{ asset('js/Navigation.js') }}"></script>
 
 
 
-</script>
-<script src="{{asset("js/cookiecheck.js")}}" ></script>
+
+
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>

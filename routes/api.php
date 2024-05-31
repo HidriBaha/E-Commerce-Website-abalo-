@@ -10,4 +10,7 @@ Route::get('/user', function (Request $request) {
 
 
 Route::get('/articles','App\Http\Controllers\AbArticleController@SearchAPI');
-Route::post('/articles','App\Http\Controllers\AbArticleController@SearchAPI');
+Route::post('/api/articles','App\Http\Controllers\AbArticleController@addArticleAPI');
+Route::post('/shoppingcart', 'App\Http\Controllers\AbArticleController@addtocart');
+Route::get('/shoppingcart', 'App\Http\Controllers\AbArticleController@getcart');
+Route::delete('/shoppingcart/{shoppingcartid}/articles/{articleId}','App\Http\Controllers\AbArticleController@deleteCartedArticle');

@@ -57,8 +57,7 @@ public function addArticleAPI(Request $r)
         $article->addArticle($name, $price, $description);
 
 
-        return response()->json(['id' => '$r']);
-    }
+        return response()->json(['id' => $article->id]);    }
 
     else{
         return response()->json(['error' => 'Missing parameters.']);
@@ -67,4 +66,49 @@ public function addArticleAPI(Request $r)
 
 
 }
-}
+    public function addtocart(Request $r): \Illuminate\Http\JsonResponse
+    {
+        $creatorId = 1;
+        $success = (new abArticle())->addtocart($r->articleid, $creatorId);//creatorid noch nicht implementiert
+        $cartdata = (new abArticle())->getcart($creatorId);//antwortet immer mit updated cart
+        if ($success) {
+            return response()->json([
+                'success' => 'article was added to cart',
+                'cartdata' => $cartdata
+            ]);
+        } else {
+            return response()->json([
+                'error' => 'article is already in your cart',
+                'cartdata' => $cartdata
+            ]);
+        } }
+
+    public function getcart(Request $r)
+    {
+        $creatorId = 1; //normalerweise würde ich die über cookies oder sessionid abrufen, aber login ist nicht implementiert
+        $cart = (new abArticle())->getcart($creatorId);
+        return response()->json([
+            'success' => 'successfully got cartdata',
+            'cartdata' => $cart
+        ]);
+    }
+    public function deleteCartedArticle(Request $r)
+    {
+        $shoppingcartid = $r->route('shoppingcartid');
+        $articleId = $r->route('articleId');
+        $creatorId = 1;
+        $success = (new abArticle())->deletefromcart($articleId, $shoppingcartid);
+        $cartdata = (new abArticle())->getcart($creatorId);
+        if ($success) {
+            return response()->json([
+                'success' => 'deleted article from cart',
+                'cartdata' => $cartdata
+            ]);
+        } else {
+            return response()->json([
+                'error' => 'failed to delete article',
+                'cartdata' => $cartdata
+            ]);
+        }
+
+    }}
