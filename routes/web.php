@@ -29,5 +29,6 @@ Route::get('/newarticle', function () {
 
 });
 Route::post('/newarticle', [\App\Http\Controllers\abArticleController::class, 'addArticleAJAX']);
+Route::view('/newsite','NewSite');
 require __DIR__.'/auth.php';
 

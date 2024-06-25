@@ -17,7 +17,10 @@ class AbArticleController extends Controller
         } else {
             $ab_article = $ab_article->get();
         }
-        return view('Search', ['ab_article' => $ab_article]);
+        $limit = $request->input('limit', 8); // Default limit of 5 items per page
+        $articles = $ab_article->paginate($limit);
+        $totalCount= $articles->total();
+        return view('TestSearch', ['ab_article' => $ab_article,'total_count' => $totalCount,]);
     }
 
     public function SearchAPI(Request $request)
@@ -28,8 +31,13 @@ class AbArticleController extends Controller
 
 
             $articles = abArticle::ab_articleSearch($search);
-            return response()->json($articles);
-        }
+            $count = $articles->count();
+
+            // Return response with articles and count
+            return response()->json([
+                'articles' => $articles,
+                'count' => $count,
+            ]);        }
     }
 
     public function addArticleAJAX(Request $r)

@@ -22,9 +22,14 @@ class AbArticle extends Model
     ];
 
     public static function ab_articleSearch($request)
-    {
+    {   $limit = PHP_INT_MAX;
+        $offset = 0;
+        if (isset($_GET["limit"]))
+            $limit = $_GET["limit"];
+        if (isset($_GET["offset"]))
+            $offset = $_GET["offset"];
         return DB::table('ab_article')
-            ->where('ab_name', 'ilike', '%' . $request . '%')->get();
+            ->where('ab_name', 'ilike', '%' . $request . '%')->limit($limit)->offset($offset)->get();
     }
 
     public function addArticle($name, $price, $description)
