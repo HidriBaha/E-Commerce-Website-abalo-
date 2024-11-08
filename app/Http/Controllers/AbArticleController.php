@@ -18,8 +18,10 @@ class AbArticleController extends Controller
             $ab_article = $ab_article->get();
         }
         $limit = $request->input('limit', 8); // Default limit of 5 items per page
-        $articles = $ab_article->paginate($limit);
-        $totalCount= $articles->total();
+        $articles = $ab_article;
+
+        // Get the total count of articles
+        $totalCount = $articles->count();
         return view('TestSearch', ['ab_article' => $ab_article,'total_count' => $totalCount,]);
     }
 

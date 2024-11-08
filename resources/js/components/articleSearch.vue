@@ -1,17 +1,17 @@
 <template>
-    <div>
-        <h1>Artikel einkaufen</h1>
-        <div id="filter-div">
-            <p>{{ message }}</p>
-            <label for="filter">Artikel suchen:</label>
-            <input id="filter" type="text" @input="addEvent" v-model="searchText" class="search-input"><br>
-            <div class="articles-container">
-                <div v-for="item in articles" :key="item.id" class="article-card">
-                    <img :src="`/articelimages/${item.id}.jpg`" alt="Image" class="img-thumbnail">
-                    <div class="article-details">
-                        <p>ID: {{ item.id }}</p>
-                        <p>Name: {{ item.ab_name }}</p>
-                        <p>Price: {{ item.ab_price +"€" }}</p>
+    <div class="artikel">
+        <h1 class="artikel__title">Artikel einkaufen</h1>
+        <div id="filter-div" class="filter-div">
+            <p class="filter-div__message">{{ message }}</p>
+            <label for="filter" class="filter-div__label">Artikel suchen:</label>
+            <input id="filter" type="text" @input="addEvent" v-model="searchText" class="filter-div__input search-input"><br>
+            <div class="filter-div__articles articles-container">
+                <div v-for="item in articles" :key="item.id" class="articles-container__card article-card">
+                    <img :src="`/articelimages/${item.id}.jpg`" alt="Image" class="article-card__image img-thumbnail">
+                    <div class="article-card__details article-details">
+                        <p class="article-details__id">ID: {{ item.id }}</p>
+                        <p class="article-details__name">Name: {{ item.ab_name }}</p>
+                        <p class="article-details__price">Price: {{ item.ab_price +"€" }}</p>
                     </div>
                 </div>
             </div>
